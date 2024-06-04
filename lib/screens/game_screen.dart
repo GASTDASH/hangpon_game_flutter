@@ -49,6 +49,80 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 40.sp,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          "HangPon",
+          style: TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w800),
+        ),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              Icons.arrow_back,
+              size: 15.sp,
+            )),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 60,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Text(fails.toString() + "/10",
+                  //     style: TextStyle(
+                  //         fontSize: 48.sp, fontWeight: FontWeight.w800)),
+                  fails > 0
+                      ? SizedBox(
+                          height: 200.sp,
+                          width: 200.sp,
+                          child: Image.asset(
+                              "assets/images/hp" + fails.toString() + ".png"))
+                      : SizedBox.shrink(),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 10,
+            child: Center(
+              child: ListView.builder(
+                itemCount: word_answer.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 1.sp),
+                    child: Text(
+                        chars.contains(word_answer[index])
+                            ? word_answer[index].toUpperCase()
+                            : "_",
+                        style: TextStyle(
+                            fontSize: 32.sp, fontWeight: FontWeight.w700)),
+                  );
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 40,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.sp),
+              child: fails < 10 ? keyboard() : SizedBox.shrink(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<dynamic> showWinDialog() {
     return showDialog(
       context: context,
@@ -128,74 +202,6 @@ class _GameScreenState extends State<GameScreen> {
           ),
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "HangPon",
-          style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w800),
-        ),
-        leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back)),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 60,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Text(fails.toString() + "/10",
-                  //     style: TextStyle(
-                  //         fontSize: 48.sp, fontWeight: FontWeight.w800)),
-                  fails > 0
-                      ? SizedBox(
-                          height: 200.sp,
-                          width: 200.sp,
-                          child: Image.asset(
-                              "assets/images/hp" + fails.toString() + ".png"))
-                      : SizedBox.shrink(),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 10,
-            child: Center(
-              child: ListView.builder(
-                itemCount: word_answer.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 1.sp),
-                    child: Text(
-                        chars.contains(word_answer[index])
-                            ? word_answer[index].toUpperCase()
-                            : "_",
-                        style: TextStyle(
-                            fontSize: 32.sp, fontWeight: FontWeight.w700)),
-                  );
-                },
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 40,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.sp),
-              child: fails < 10 ? keyboard() : SizedBox.shrink(),
-            ),
-          ),
-        ],
-      ),
     );
   }
 

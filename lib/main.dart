@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(300, 650),
+      designSize: Size(270, 600),
       child: MaterialApp(
         title: 'HangPon',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: Color.fromARGB(255, 62, 255, 101),
+              seedColor: Color.fromARGB(255, 255, 223, 41),
               background: Colors.white),
           useMaterial3: true,
         ),
