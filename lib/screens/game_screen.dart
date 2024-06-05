@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:drawing_animation/drawing_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangpon_game_flutter/words.dart';
@@ -15,6 +16,7 @@ class _GameScreenState extends State<GameScreen> {
   String word_answer = "дженнифер";
   List<String> chars = <String>[];
   int fails = 0;
+  bool anim_run = true;
 
   @override
   void initState() {
@@ -81,10 +83,27 @@ class _GameScreenState extends State<GameScreen> {
                   //         fontSize: 48.sp, fontWeight: FontWeight.w800)),
                   fails > 0
                       ? SizedBox(
-                          height: 200.sp,
-                          width: 200.sp,
+                          height: 250.sp,
+                          width: 250.sp,
+                          // child: Transform.flip(
+                          //   flipY: true,
+                          //   child: AnimatedDrawing.svg(
+                          //     "assets/images/hp_" + fails.toString() + ".svg",
+                          //     run: this.anim_run,
+                          //     duration: Duration(seconds: 1),
+                          //     onFinish: () => setState(() {
+                          //       this.anim_run = false;
+                          //     }),
+                          //     scaleToViewport: true,
+                          //     animationCurve: Curves.easeOut,
+                          //   ),
+                          // ),
                           child: Image.asset(
-                              "assets/images/hp" + fails.toString() + ".png"))
+                            "assets/images/hpe_" + fails.toString() + ".png",
+                          ),
+                        )
+                      // child: Image.asset(
+                      //     "assets/images/hp_" + fails.toString() + ".png"))
                       : SizedBox.shrink(),
                 ],
               ),
@@ -128,7 +147,7 @@ class _GameScreenState extends State<GameScreen> {
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: EdgeInsets.all(10.sp),
+          insetPadding: EdgeInsets.all(14.sp),
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
           shape: RoundedRectangleBorder(
@@ -136,7 +155,7 @@ class _GameScreenState extends State<GameScreen> {
           child: Container(
             height: 200.sp,
             width: double.infinity,
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(12.sp),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -169,7 +188,7 @@ class _GameScreenState extends State<GameScreen> {
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: EdgeInsets.all(10.sp),
+          insetPadding: EdgeInsets.all(14.sp),
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
           shape: RoundedRectangleBorder(
@@ -177,7 +196,7 @@ class _GameScreenState extends State<GameScreen> {
           child: Container(
             height: 200.sp,
             width: double.infinity,
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(12.sp),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -279,7 +298,10 @@ class _GameScreenState extends State<GameScreen> {
             } else {
               chars.add(letter.toLowerCase());
               if (!word_answer.characters.contains(letter.toLowerCase())) {
-                fails++;
+                setState(() {
+                  anim_run = true;
+                  fails++;
+                });
               }
               if (fails >= 10) {
                 showFailDialog();
