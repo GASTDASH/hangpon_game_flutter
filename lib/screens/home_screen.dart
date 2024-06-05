@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangpon_game_flutter/screens/game_screen.dart';
+import 'package:hangpon_game_flutter/screens/theme_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icons.play_circle_outline,
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GameScreen()));
+                    MaterialPageRoute(builder: (context) => ThemeScreen()));
               },
             ),
             SizedBox(height: 18.sp),

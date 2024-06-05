@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hangpon_game_flutter/words.dart';
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+  const GameScreen({super.key, required this.theme});
+
+  final String theme;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -26,7 +28,8 @@ class _GameScreenState extends State<GameScreen> {
     chars = <String>[];
 
     Random _random = new Random();
-    String _word = word_list[_random.nextInt(word_list.length)];
+    String _word = word_list[widget.theme]
+        [_random.nextInt(word_list[widget.theme].length)];
     word_answer = _word;
   }
 
