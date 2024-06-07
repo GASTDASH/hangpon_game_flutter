@@ -1,3 +1,12 @@
+import 'dart:math';
+
+String get_random_word(String theme) {
+  Random _random = new Random();
+  String _word = word_list[theme][_random.nextInt(word_list[theme].length)];
+
+  return _word;
+}
+
 List<String> words_general = <String>[
   // "дженнифер",
   // "вильям",

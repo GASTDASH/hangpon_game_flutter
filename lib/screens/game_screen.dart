@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:drawing_animation/drawing_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,10 +25,7 @@ class _GameScreenState extends State<GameScreen> {
     fails = 0;
     chars = <String>[];
 
-    Random _random = new Random();
-    String _word = word_list[widget.theme]
-        [_random.nextInt(word_list[widget.theme].length)];
-    word_answer = _word;
+    word_answer = get_random_word(widget.theme);
   }
 
   void checkWin() async {
